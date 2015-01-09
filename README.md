@@ -6,7 +6,7 @@ This is a Redmine plugin that uses the ZenDesk API to query a set custom field (
 
 ### Setup
 
-- [ ] Use a plugin template to get started with integration
+- [x] Use a plugin template to get started with integration
 - [ ] Load the [ZenDesk gem](https://github.com/zendesk/zendesk_api_client_rb) for this plugin
 - [ ] Store the relevant credentials and custom field ID as configuration values
 
