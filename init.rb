@@ -1,8 +1,10 @@
+require_dependency 'redmine_zendesk_issue_bridge/hooks'
+
 Redmine::Plugin.register :redmine_zendesk_issue_bridge do
-  name 'Redmine Zendesk Issue Bridge plugin'
-  author 'Author name'
-  description 'This is a plugin for Redmine'
+  name 'Redmine Zendesk Issue Bridge'
+  author 'Raven Tools'
+  description 'Shows related ZenDesk tickets in Redmine issues.'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://example.com/about'
+  url 'https://github.com/raventools/redmine_zendesk_issue_bridge'
+  author_url 'http://raventools.com/'
 end

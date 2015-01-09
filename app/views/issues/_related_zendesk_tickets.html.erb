@@ -1,0 +1,10 @@
+<h3>Related ZenDesk Tickets</h3>
+<ul>
+	<% if !issues.nil? && issues.count > 0 %>
+	<% issues.each do |ticket| %>
+	<li><a href="<%= ticket.url %>">Issue #<%= ticket.id %></a> - <%= ticket.title %> (<%= ticket.status %>)</li>
+	<% end %>
+	<% else %>
+	<li>No related tickets.</li>
+	<% end %>
+</ul>
