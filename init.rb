@@ -1,5 +1,3 @@
-require_dependency 'redmine_zendesk_issue_bridge/hooks'
-
 Redmine::Plugin.register :redmine_zendesk_issue_bridge do
   name 'Redmine Zendesk Issue Bridge'
   author 'Raven Tools'
@@ -7,4 +5,9 @@ Redmine::Plugin.register :redmine_zendesk_issue_bridge do
   version '0.0.1'
   url 'https://github.com/raventools/redmine_zendesk_issue_bridge'
   author_url 'http://raventools.com/'
+
+  settings :default => {'empty' => true}, :partial => 'settings/zendesk_settings'
 end
+
+require_dependency 'redmine_zendesk_issue_bridge/retrieve_ticket_data'
+require_dependency 'redmine_zendesk_issue_bridge/hooks'

@@ -1,8 +1,11 @@
-<h3>Related ZenDesk Tickets</h3>
+<hr />
+<p>
+	<strong>Related ZenDesk Tickets</strong>
+</p>
 <ul>
-	<% if !issues.nil? && issues.count > 0 %>
-	<% issues.each do |ticket| %>
-	<li><a href="<%= ticket.url %>">Issue #<%= ticket.id %></a> - <%= ticket.title %> (<%= ticket.status %>)</li>
+	<% if @issue.related_zendesk_tickets.count > 0 %>
+	<% @issue.related_zendesk_tickets.each do |ticket| %>
+		<li><%= link_to "Ticket #{ticket[:id]}", "https://#{@issue.zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}" %> (<%= ticket[:status] %>) - <%= ticket[:subject] %></li>
 	<% end %>
 	<% else %>
 	<li>No related tickets.</li>
