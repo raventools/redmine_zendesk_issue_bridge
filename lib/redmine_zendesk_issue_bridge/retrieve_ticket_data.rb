@@ -53,7 +53,7 @@ module IssuePatch
     end
 
     ##
-    # ZenDesk Client
+    # Zendesk Client
     def zendesk_client
       require 'zendesk_api'
       ZendeskAPI::Client.new do |config|
