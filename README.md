@@ -7,14 +7,14 @@ This is a Redmine plugin that uses the ZenDesk API to query a set custom field (
 ### Setup
 
 - [x] Use a plugin template to get started with integration
-- [ ] Load the [ZenDesk gem](https://github.com/zendesk/zendesk_api_client_rb) for this plugin
-- [ ] Store the relevant credentials and custom field ID as configuration values
+- [x] Load the [ZenDesk gem](https://github.com/zendesk/zendesk_api_client_rb) for this plugin
+- [x] Store the relevant credentials and custom field ID as configuration values
 
 ### Issue View
 
-- [ ] Add text block to issue detail
-- [ ] Use API to query list of matching issues on configured custom field
-- [ ] Display list with links (and relevant meta data, e.g. ticket status)
+- [x] Add text block to issue detail
+- [x] Use API to query list of matching issues on configured custom field
+- [x] Display list with links (and relevant meta data, e.g. ticket status)
 
 ### Table View
 
