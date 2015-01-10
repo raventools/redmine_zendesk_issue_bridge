@@ -29,6 +29,8 @@ module IssuePatch
         tickets << ticket if matches_on_custom_field?(ticket[:fields])
       end
       tickets
+    rescue
+      []
     end
 
     def zendesk_subdomain
@@ -39,8 +41,11 @@ module IssuePatch
 
     # Match on Custom Field
     def matches_on_custom_field?(custom_fields = [])
-      custom_fields.each do |field|
-        return true if field.id == Issue.zendesk_settings[:zendesk_custom_field_id].to_i && field.value.include?(id.to_s)
+      custom_fields.each do |f|
+        next if f.id != Issue.zendesk_settings[:zendesk_custom_field_id].to_i
+        next if f.value.nil?
+        tickets = f.value.split(/,\s?/).map(&:strip)
+        return true if tickets.include?(id.to_s)
       end
       false
     end
@@ -57,13 +62,11 @@ module IssuePatch
     def zendesk_client
       require 'zendesk_api'
       ZendeskAPI::Client.new do |config|
-        config.url = "https://#{Issue.zendesk_settings[:zendesk_subdomain]}.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+        subdomain = Issue.zendesk_settings[:zendesk_subdomain]
+        config.url = "https://#{subdomain}.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
         config.username = Issue.zendesk_settings[:zendesk_username]
         config.password = Issue.zendesk_settings[:zendesk_password]
         config.retry = true
-        # Logger prints to STDERR by default, to e.g. print to stdout:
-        require 'logger'
-        config.logger = Logger.new(STDOUT)
       end
     end
   end
