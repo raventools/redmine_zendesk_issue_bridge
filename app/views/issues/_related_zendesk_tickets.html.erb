@@ -19,8 +19,8 @@
       <td class="id"><%= link_to ticket[:id], "https://#{@issue.zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}" %>
       <td class="status"><%= ticket[:status] %></td>
       <td class="subject"><%= link_to ticket[:subject], "https://#{@issue.zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}" %></td>
-      <td class="created_at"><%= ticket[:created_at].strftime('%m/%d/%Y') %></td>
-      <td class="updated_at"><%= ticket[:updated_at].strftime('%m/%d/%Y') %></td>
+      <td class="created_at"><span title="<%= ticket[:created_at] %>"><%= ticket[:created_at].strftime('%m/%d/%Y') %></span></td>
+      <td class="updated_at"><span title="<%= ticket[:updated_at] %>"><%= ticket[:updated_at].strftime('%m/%d/%Y') %></span></td>
     </tr>
     <% end %>
   </body>
