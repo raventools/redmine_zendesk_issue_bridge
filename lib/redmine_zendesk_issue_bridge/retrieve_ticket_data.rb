@@ -24,7 +24,7 @@ module IssuePatch
   module InstanceMethods
     def related_zendesk_tickets
       tickets = []
-      retrieved = retrieve_from_api
+      retrieved = zendesk_client.search query: "fieldvalue:#{id}"
       retrieved.each do |ticket|
         tickets << ticket if matches_on_custom_field?(ticket[:fields])
       end
@@ -39,6 +39,7 @@ module IssuePatch
 
     private
 
+    ##
     # Match on Custom Field
     def matches_on_custom_field?(custom_fields = [])
       custom_fields.each do |f|
@@ -48,13 +49,6 @@ module IssuePatch
         return true if tickets.include?(id.to_s)
       end
       false
-    end
-
-    # Retrieve related tickets from API
-    def retrieve_from_api
-      zendesk_client.search(
-        query: "fieldvalue:#{id}"
-      )
     end
 
     ##
