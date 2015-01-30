@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Redmine Zendesk Issue Bridge by raventools</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Redmine Zendesk Issue Bridge</h1>
+        <p>This is a Redmine plugin that uses the Zendesk API to query a particular custom field (e.g. Redmine Issue ID) to pull in a list of associated tickets to the issue view. It has been tested with Redmine 2.6.x.</p>
+
+        <p class="view"><a href="https://github.com/raventools/redmine_zendesk_issue_bridge">View the Project on GitHub <small>raventools/redmine_zendesk_issue_bridge</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/raventools/redmine_zendesk_issue_bridge/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/raventools/redmine_zendesk_issue_bridge/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/raventools/redmine_zendesk_issue_bridge">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="use-case" class="anchor" href="#use-case" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Case</h2>
+
+<ul>
+<li>You use Zendesk to manage your customer support requests</li>
+<li>You use Redmine to manage your development team's bug fixes</li>
+<li>When you create a Redmine issue to address a customer ticket, you cross-reference it in the Zendesk ticket via a custom field</li>
+<li>You need to see a list of related tickets when viewing a Redmine issue</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Installs the same as any Redmine 2.x plugin. Please <a href="http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin">read this guide</a> for basic tips.</p>
+
+<ol>
+<li>Unzip or clone into to your <code>./plugins</code> folder (e.g. <code>/path/to/redmine/plugins/redmine_zendesk_issue_bridge</code>)</li>
+<li>Run <code>bundle install</code> to pick up the necessary Gems</li>
+<li>Restart your Redmine instance</li>
+<li>Go to <code>Administration</code> &gt; <code>Plugins</code> to verify that the plugin is shown</li>
+<li>Click <code>Configure</code>
+</li>
+</ol>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p><img src="https://cloud.githubusercontent.com/assets/80459/5980834/efe74fee-a879-11e4-8f7f-900abdfa316d.png" alt="1-settings"></p>
+
+<ul>
+<li>
+<a href="https://github.com/raventools/redmine_zendesk_issue_bridge/wiki/How-to-find-the-Custom-Field-ID">Custom field ID</a> (from Zendesk)</li>
+<li>Subdomain for Zendesk install (e.g. <code>example</code> for <code>example.zendesk.com</code>)</li>
+<li>A username to retrieve ticket detais</li>
+<li>A password to retrieve ticket details</li>
+</ul>
+
+<h2>
+<a id="in-action" class="anchor" href="#in-action" aria-hidden="true"><span class="octicon octicon-link"></span></a>In Action</h2>
+
+<p><img src="https://cloud.githubusercontent.com/assets/80459/5980843/ffa61032-a879-11e4-9404-6aaf67ee32cc.png" alt="2-related-tickets"></p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it ( <a href="https://github.com/raventools/redmine_zendesk_issue_bridge/fork">https://github.com/raventools/redmine_zendesk_issue_bridge/fork</a> )</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create a new Pull Request</li>
+</ol>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/raventools">raventools</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
