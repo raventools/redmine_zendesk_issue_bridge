@@ -1,0 +1,8 @@
+<div id="redmine_zendesk_issue_bridge">Loading Related Zendesk Tickets  <%= image_tag 'spinner.gif', :plugin => 'redmine_zendesk_issue_bridge' %>
+</div>
+
+<script type="text/javascript">
+$.get("<%= issue_url(params[:id]) %>/redmine_zendesk_issue_bridge", function(data){
+	$( '#redmine_zendesk_issue_bridge' ).html( data );
+})
+</script>
