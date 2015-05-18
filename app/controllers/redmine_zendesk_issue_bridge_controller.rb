@@ -1,4 +1,4 @@
-# Sample plugin controller
+# Redmine Zendesk Issue Bridge Controller
 class RedmineZendeskIssueBridgeController < ApplicationController
   unloadable
 
@@ -13,9 +13,7 @@ class RedmineZendeskIssueBridgeController < ApplicationController
 private
 	def related_zendesk_tickets
 		tickets = []
-
 		retrieved = zendesk_client.search query: "fieldvalue:#{params[:id]}"
-
 		retrieved.each do |ticket|
 			tickets << ticket if matches_on_custom_field?(ticket[:fields])
 		end
