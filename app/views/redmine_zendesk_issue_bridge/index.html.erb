@@ -1,8 +1,8 @@
 <hr />
 <p>
-  <strong>Related Zendesk Tickets (<%= @issue.related_zendesk_tickets.count %>)</strong>
+  <strong>Related Zendesk Tickets (<%= @related_zendesk_tickets.count %>)</strong>
 </p>
-<% if @issue.related_zendesk_tickets.count > 0 %>
+<% if @related_zendesk_tickets.count > 0 %>
 <table class="list issues">
   <thead>
     <tr>
@@ -15,11 +15,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @issue.related_zendesk_tickets.each do |ticket| %>
+    <% @related_zendesk_tickets.each do |ticket| %>
     <tr>
-      <td class="id"><%= link_to ticket[:id], "https://#{@issue.zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %>
+      <td class="id"><%= link_to ticket[:id], "https://#{@zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %>
       <td class="status"><%= ticket[:status] %></td>
-      <td class="subject"><%= link_to ticket[:subject], "https://#{@issue.zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %></td>
+      <td class="subject"><%= link_to ticket[:subject], "https://#{@zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %></td>
       <% if ticket.assignee.nil? %>
       <td class="assignee_id"><%= ticket.group.name %></td>
       <% else %>
@@ -32,5 +32,5 @@
   </body>
 </table>
 <% else %>
-<p>No related tickets.</p>
+  <p>No related tickets.</p>
 <% end %>

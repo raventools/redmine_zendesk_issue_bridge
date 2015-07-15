@@ -1,2 +1,4 @@
 Gemfile.lock
 config/deploy.yml
+*.DS_Store
+*.gitignore
