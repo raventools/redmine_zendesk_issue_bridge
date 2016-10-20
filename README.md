@@ -14,7 +14,7 @@ This is a Redmine plugin that uses the Zendesk API to query a particular custom 
 Installs the same as any Redmine 2.x plugin. Please [read this guide](http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin) for basic tips.
 
 1. Unzip or clone into to your `./plugins` folder (e.g. `/path/to/redmine/plugins/redmine_zendesk_issue_bridge`)
-2. Run `bundle install` to pick up the necessary Gems
+2. Run `bundle exec rake redmine:plugins:migrate RAILS_ENV=production` from your Redmine root directory to pick up the necessary Gems
 3. Restart your Redmine instance
 4. Go to `Administration` > `Plugins` to verify that the plugin is shown
 5. Click `Configure`
