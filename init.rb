@@ -1,3 +1,5 @@
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib"
+
 Redmine::Plugin.register :redmine_zendesk_issue_bridge do
   name 'Redmine Zendesk Issue Bridge'
   author 'Raven Tools'
