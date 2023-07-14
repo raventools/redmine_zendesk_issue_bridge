@@ -1,5 +1,10 @@
 <hr />
 <p>
+  <label for="ticket-id">Zendesk Ticket ID:</label>
+  <input type="text" id="ticket-id" name="ticket_id">
+  <button onclick="submitZendeskTicketId(event)">connect</button>
+</p>
+<p>
   <strong>Related Zendesk Tickets (<%= @related_zendesk_tickets.count %>)</strong>
 </p>
 <% if @related_zendesk_tickets.count > 0 %>
@@ -12,27 +17,152 @@
       <th>Assigned</th>
       <th>Created</th>
       <th>Updated</th>
+      <th>Disconnect</th>
+      <th>ticket status change</th>
     </tr>
   </thead>
   <tbody>
     <% @related_zendesk_tickets.each do |ticket| %>
     <tr>
-      <td class="id"><%= link_to ticket[:id], "https://#{@zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %>
+      <td class="id"><%= link_to ticket[:id], "https://#{@zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %></td>
       <td class="status"><%= ticket[:status] %></td>
       <td class="subject"><%= link_to ticket[:subject], "https://#{@zendesk_subdomain}.zendesk.com/agent/tickets/#{ticket[:id]}", target: '_blank' %></td>
-      <% if ticket.assignee && ticket.group %>
-      <td class="assignee_id"><%= mail_to ticket.assignee.email, ticket.assignee.name, title: ticket.group.name %></td>
-      <% elsif ticket.group %>
-      <td class="assignee_id"><%= ticket.group.name %></td>
+      <% if ticket[:assignee] && ticket[:group] %>
+      <td class="assignee_id"><%= mail_to ticket[:assignee][:email], ticket[:assignee][:name], title: ticket[:group][:name] %></td>
+      <% elsif ticket[:group] %>
+      <td class="assignee_id"><%= ticket[:group][:name] %></td>
       <% else %>
       <td class="assignee_id">(Unassigned)</td>
       <% end %>
       <td class="created_at"><span title="<%= ticket[:created_at] %>"><%= ticket[:created_at].strftime('%m/%d/%Y') %></span></td>
       <td class="updated_at"><span title="<%= ticket[:updated_at] %>"><%= ticket[:updated_at].strftime('%m/%d/%Y') %></span></td>
+      <td>
+        <button class="disconnect-button" data-ticket-id="<%= ticket[:id] %>" onclick="confirmDisconnect(event)">Disconnect</button>
+      </td>
+      <% if ticket[:status] == 'open' %>
+	<td>
+	  <button class="pending-button" data-ticket-id="<%= ticket[:id] %>" onclick="confirmPending(event)">hold</button>
+	</td>
+      <% elsif ticket[:status] == 'hold' %>
+	<td>
+	  <button class="open-button" data-ticket-id="<%= ticket[:id] %>" onclick="confirmOpen(event)">open</button>
+	</td>
+      <% end %>
     </tr>
     <% end %>
-  </body>
+  </tbody>
 </table>
+
 <% else %>
   <p>No related tickets.</p>
 <% end %>
+
+<script>
+  function confirmDisconnect(event){
+    if(confirm('Disconnect?')){
+      var button = event.target;
+      var ticketId = button.getAttribute('data-ticket-id');
+      handleButtonDisconnect(event, ticketId);
+    }
+    else{
+      event.preventDefault();
+    }
+  }
+
+  function handleButtonDisconnect(event, ticketId){
+    fetch('/update_ticket_field_value/' + ticketId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': '<%= form_authenticity_token %>'
+      },
+      body: JSON.stringify({ issueNumber: "" })
+    })
+    .then(response => {
+      if (response.ok) {
+
+
+      } else {
+
+      }
+    })
+    .catch(error => {
+
+    });
+  }
+
+
+  function confirmOpen(event){
+    if(confirm('open your ticket?')){
+      handleButtonClick(event, 'open');
+    }
+    else{
+      event.preventDefault();
+    }
+  }
+
+  function confirmPending(event) {
+    if (confirm('hold your ticket?')) {
+      handleButtonClick(event, 'hold');
+    }
+    else{
+      event.preventDefault();
+    }
+  }
+
+  function handleButtonClick(event, status) {
+    var button = event.target;
+    var ticketId = button.getAttribute('data-ticket-id');
+
+    fetch('/update_ticket_status/' + ticketId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': '<%= form_authenticity_token %>'
+      },
+      body: JSON.stringify({ status: status })
+    })
+    .then(response => {
+      if (response.ok) {
+
+      } else {
+
+      }
+    })
+    .catch(error => {
+
+    });
+  }
+
+  function submitZendeskTicketId(event){
+    event.preventDefault();
+    var ticketId = document.getElementById('ticket-id').value;
+
+    var currentURL = window.location.href;
+    var regex = /\/(\d+)/;
+    var match = currentURL.match(regex);
+    var issueNumber = match ? match[1] : "";
+
+    // AJAX 요청을 통해 서버로 상태 값을 업데이트합니다.
+    fetch('/update_ticket_field_value/' + ticketId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': '<%= form_authenticity_token %>'
+      },
+      body: JSON.stringify({ issueNumber: issueNumber })
+    })
+    .then(response => {
+      if (response.ok) {
+
+      } else {
+
+      }
+    })
+    .catch(error => {
+
+    });
+
+  }
+
+</script>
