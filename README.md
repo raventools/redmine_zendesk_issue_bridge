@@ -1,3 +1,5 @@
+# Note this repository has been archived. It has been unmaintained since 2016.
+
 # Redmine to Zendesk Issue Bridge
 
 This is a Redmine plugin that uses the Zendesk API to query a particular custom field (e.g. Redmine Issue ID) to pull in a list of associated tickets to the issue view. It has been tested with Redmine 2.6.x.
