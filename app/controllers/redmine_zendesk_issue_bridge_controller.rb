@@ -3,7 +3,7 @@ class RedmineZendeskIssueBridgeController < ApplicationController
   unloadable
 
   layout false
-  before_filter :require_login
+  before_action :require_login
 
   def index
     @zendesk_subdomain = Issue.zendesk_settings[:zendesk_subdomain]
@@ -47,6 +47,10 @@ private
 			config.url = "https://#{subdomain}.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
 			config.username = Issue.zendesk_settings[:zendesk_username]
 			config.password = Issue.zendesk_settings[:zendesk_password]
+
+#       If the retrieved value you received is [], please try querying with the token. When retrieving the token, make sure to append "/token" to the username.
+# 			config.token = "user_zendesk_token"
+# 			config.username = "username/token"
 			config.retry = true
 		end
 	end
